@@ -48,7 +48,7 @@ class TimerButton extends StatefulWidget {
   ///
 
   final String showUnit;
-  final EndDecoration endDecortiaon;
+  final EndDecoration endDecoration;
 
   ///[onPressed] Called when the button is tapped or otherwise activated.
   final VoidCallback onPressed;
@@ -80,7 +80,7 @@ class TimerButton extends StatefulWidget {
     this.labelwitchStyle = LabelWitchStyle.sub,
     this.showUnit = secPostFix,
     this.isBeginAfaterLoaded = true,
-    this.endDecortiaon = EndDecoration.none,
+    this.endDecoration = EndDecoration.none,
     this.color = Colors.blue,
     this.resetTimerOnPressed = true,
     this.disabledColor,
@@ -136,7 +136,7 @@ class _TimerButtonState extends State<TimerButton> {
       labelStr = widget.labelwitchStyle == LabelWitchStyle.main
           ? widget.label
           : (widget.reLabel.length > 0 ? widget.reLabel : widget.label);
-      switch (widget.endDecortiaon) {
+      switch (widget.endDecoration) {
         case EndDecoration.splitter:
           timeStr = '$labelStr$labelSplitter$timerText';
           break;
