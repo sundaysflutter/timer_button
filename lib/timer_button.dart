@@ -48,7 +48,7 @@ class TimerButton extends StatefulWidget {
   ///
 
   final String showUnit;
-  final EndDecoration endDecoration;
+  final EndDecoration endDecortiaon;
 
   ///[onPressed] Called when the button is tapped or otherwise activated.
   final VoidCallback onPressed;
@@ -80,7 +80,7 @@ class TimerButton extends StatefulWidget {
     this.labelwitchStyle = LabelWitchStyle.sub,
     this.showUnit = secPostFix,
     this.isBeginAfaterLoaded = true,
-    this.endDecoration = EndDecoration.none,
+    this.endDecortiaon = EndDecoration.none,
     this.color = Colors.blue,
     this.resetTimerOnPressed = true,
     this.disabledColor,
@@ -136,7 +136,7 @@ class _TimerButtonState extends State<TimerButton> {
       labelStr = widget.labelwitchStyle == LabelWitchStyle.main
           ? widget.label
           : (widget.reLabel.length > 0 ? widget.reLabel : widget.label);
-      switch (widget.endDecoration) {
+      switch (widget.endDecortiaon) {
         case EndDecoration.splitter:
           timeStr = '$labelStr$labelSplitter$timerText';
           break;
@@ -202,9 +202,23 @@ class _TimerButtonState extends State<TimerButton> {
   }
 
   _onPressed() {
-    _isFirstFire = false;
     if (timeUpFlag) {
       setState(() {
+        timeUpFlag = false;
+      });
+      timeCounter = widget.timeOutInSeconds;
+
+      if (widget.onPressed != null) {
+        widget.onPressed();
+      }
+      // reset the timer when the button is pressed
+      if (widget.resetTimerOnPressed) {
+        _timerUpdate();
+      }
+    }
+    if (_isFirstFire == true) {
+      setState(() {
+        _isFirstFire = false;
         timeUpFlag = false;
       });
       timeCounter = widget.timeOutInSeconds;
